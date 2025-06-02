@@ -1,9 +1,13 @@
 //keybinds setter
 //keybinds getter
-color leftColor = color(255, 255, 0);
-color upColor = color(255, 0, 0);
-color downColor = color(0, 0, 255);
-color rightColor = color(0, 255, 0);
+color defaultleftColor = color(255, 255, 0);
+color defaultupColor = color(255, 0, 0);
+color defaultdownColor = color(0, 0, 255);
+color defaultrightColor = color(0, 255, 0);
+color leftColor = defaultleftColor;
+color upColor = defaultupColor;
+color downColor = defaultdownColor;
+color rightColor = defaultrightColor;
 ArrayList<PVector> gurt = new ArrayList<PVector>();
 ArrayList<Note> realBeats = new ArrayList<Note>();
 int leftLane, rightLane, upLane, downLane;
@@ -48,16 +52,16 @@ void drawBeats() {
   for (PVector p : gurt) {
     switch ((int)p.x) {
       case 1: 
-        noteColor = leftColor;
+        noteColor = defaultleftColor;
         break;
       case 2:
-        noteColor = downColor;
+        noteColor = defaultdownColor;
         break;
       case 3:
-        noteColor = upColor;
+        noteColor = defaultupColor;
         break;
       case 4:
-        noteColor = rightColor;
+        noteColor = defaultrightColor;
         break;
     }
     if (frameCount / 60.0 == p.y + 0.0 && frameCount % 60 == 0) {
@@ -85,15 +89,16 @@ void draw() {
     textSize(50);
     text(realBeats.size(), 100, 100, 100);
     text(frameCount / 60, 100, 200, 200);
+    drawBeats();
 
     if (cKeys[LEFT] || cKeys[lkey]) leftColor = 255;
-    else leftColor = color(255, 255, 0);
+    else leftColor = defaultleftColor;
     if (cKeys[UP] || cKeys[ukey]) upColor = 255;
-    else upColor = color(255, 0, 0);
+    else upColor = defaultupColor;
     if (cKeys[DOWN] || cKeys[dkey]) downColor = 255;
-    else downColor = color(0, 0, 255);
+    else downColor = defaultdownColor;
     if (cKeys[RIGHT] || cKeys[rkey]) rightColor = 255;
-    else rightColor = color(0, 255, 0);
+    else rightColor = defaultrightColor;
 
     fill(leftColor);
     rect(width * 4/11, height * 7/8, 40, 40);
@@ -103,7 +108,7 @@ void draw() {
     rect(width * 6/11, height * 7/8, 40, 40);
     fill(rightColor);
     rect(width * 7/11, height * 7.0/8, 40, 40);
-    drawBeats();
+    
 
     break;
   }
