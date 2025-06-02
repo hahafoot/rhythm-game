@@ -10,6 +10,7 @@ int leftLane, rightLane, upLane, downLane;
 
 char lkey, ukey, dkey, rkey;
 int gameStartFrame;
+int bpm = 120; //getbpm
 
 int mode = 2; // set to 1 for final build
 
@@ -17,7 +18,7 @@ boolean[] cKeys;
 
 
 void setup() {
-  frameRate(120 ); //getbpm
+  frameRate(60);
   fullScreen();
   background(0);
   cKeys = new boolean[255];
@@ -41,31 +42,49 @@ void setup() {
 }
 
 void drawBeats() {
+  color noteColor = 0;
+  
 
   for (PVector p : gurt) {
-    if (frameCount / 60 == p.y) realBeats.add(new Note(p));
+    switch ((int)p.x) {
+      case 1: 
+        noteColor = leftColor;
+        break;
+      case 2:
+        noteColor = downColor;
+        break;
+      case 3:
+        noteColor = upColor;
+        break;
+      case 4:
+        noteColor = rightColor;
+        break;
+    }
+    if (frameCount / 60.0 == p.y + 0.0 && frameCount % 60 == 0) {
+      realBeats.add(new Note(p, noteColor));
+    }
   }
   for (Note n : realBeats) {
-    n.drawNote();
+    n.drawNote(bpm); // getbpm
   }
 }
 
 
 
 void draw() {
+
   switch (mode) {
   case 1:
     //start menu
     break;
   case 2:
-    clear();
+    background(0);
     fill(0);
-    rect(100, 100, 100, 100);
+    rect(0, 0, 200, 200);
     fill(255);
     textSize(50);
-    //text(frameCount, 100, 100, 100);
+    text(realBeats.size(), 100, 100, 100);
     text(frameCount / 60, 100, 200, 200);
-    drawBeats();
 
     if (cKeys[LEFT] || cKeys[lkey]) leftColor = 255;
     else leftColor = color(255, 255, 0);
@@ -83,8 +102,8 @@ void draw() {
     fill(upColor);
     rect(width * 6/11, height * 7/8, 40, 40);
     fill(rightColor);
-    rect(width * 7/11, height * 7/8, 40, 40);
-
+    rect(width * 7/11, height * 7.0/8, 40, 40);
+    drawBeats();
 
     break;
   }
