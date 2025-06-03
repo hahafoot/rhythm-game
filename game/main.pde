@@ -14,7 +14,7 @@ int leftLane, rightLane, upLane, downLane;
 
 char lkey, ukey, dkey, rkey;
 int gameStartFrame;
-int bpm = 120; //getbpm
+int bpm = 240; //getbpm
 
 int mode = 2; // set to 1 for final build
 
@@ -64,7 +64,7 @@ void drawBeats() {
         noteColor = defaultrightColor;
         break;
     }
-    if (frameCount / 60.0 == p.y + 0.0 && frameCount % 60 == 0) {
+    if (frameCount /(0.0 +  bpm) * bpm / 60 == (p.y * (60.0 / bpm))) {
       realBeats.add(new Note(p, noteColor));
     }
   }
@@ -88,7 +88,7 @@ void draw() {
     fill(255);
     textSize(50);
     text(realBeats.size(), 100, 100, 100);
-    text(frameCount / 60, 100, 200, 200);
+    text(frameCount / 60.0, 100, 200, 200);
     drawBeats();
 
     if (cKeys[LEFT] || cKeys[lkey]) leftColor = 255;

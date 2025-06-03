@@ -9,6 +9,6 @@ class Note {
   public void drawNote(int bpm) {
     fill(noteColor);
     rect(notePos.x, notePos.y, 40,40);
-    notePos.y += ((0.0 + height * 7.0/8) * bpm/3600.0 / 5 );
+    notePos.y += ((0.0 + height * 7.0/8) * bpm/3600.0 / 4 );
   }
 }
