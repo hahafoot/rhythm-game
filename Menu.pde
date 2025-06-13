@@ -44,9 +44,9 @@ class Menu {
     parent.textAlign(PConstants.CENTER, PConstants.CENTER);
     parent.textSize(64);
     parent.fill(0, 0, 0, 150);
-    parent.text("OSU DUP", parent.width/2 + 3, parent.height/2 - 180 + 3);
+    parent.text("OSU DUPE", parent.width/2 + 3, parent.height/2 - 180 + 3);
     parent.fill(255);
-    parent.text("OSU DUP", parent.width/2, parent.height/2 - 180);
+    parent.text("OSU DUPE", parent.width/2, parent.height/2 - 180);
 
     playBtn.draw(parent);
     editorBtn.draw(parent);
